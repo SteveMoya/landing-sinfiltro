@@ -1,0 +1,20 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<a
+  href="/"
+  aria-label="SIN.FILTRO — inicio"
+  class:list={['group inline-flex items-center gap-2', className]}
+>
+  <span class="brutal-sm grid h-9 w-9 place-items-center bg-brutal-red font-display text-sm text-cream transition-transform duration-150 group-hover:-rotate-12" aria-hidden="true">
+    !
+  </span>
+  <span class="font-display text-xl uppercase tracking-tight text-ink">
+    SIN<span class="bg-brutal-red px-1 text-cream">.FILTRO</span>
+  </span>
+</a>

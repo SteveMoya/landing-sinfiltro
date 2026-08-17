@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout title="Página no encontrada" description="404 — esta página no existe." noindex>
+  <section class="flex min-h-[80svh] flex-col items-center justify-center px-6 text-center">
+    <p class="font-mono text-xs font-bold uppercase tracking-[0.2em] text-ink/50">Error 404</p>
+    <h1 class="mt-4 font-display text-8xl uppercase tracking-tight md:text-9xl">
+      No existe<span class="bg-brutal-red px-3 text-cream">.y qué.</span>
+    </h1>
+    <p class="mt-6 max-w-md text-ink/60">
+      Esta página no existe. Como el humo que prometemos no vender. Vuelve al inicio.
+    </p>
+    <Button href="/" variant="yellow" class="mt-8">
+      Volver al inicio
+    </Button>
+  </section>
+</BaseLayout>

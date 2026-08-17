@@ -1,0 +1,80 @@
+---
+import { site } from '../../data/site';
+import Logo from '../brand/Logo.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<footer class="border-t-3 border-ink bg-ink text-cream">
+  <div class="container-brutal py-16">
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+      <div class="flex flex-col gap-5">
+        <div class="inline-flex w-fit bg-cream px-2 py-1">
+          <Logo />
+        </div>
+        <p class="max-w-xs text-sm leading-relaxed text-cream/70">
+          {site.description}
+        </p>
+        <div class="flex gap-3">
+          {
+            site.socials.map((s) => (
+              <a
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.name}
+                class="grid h-10 w-10 place-items-center border-3 border-cream bg-cream text-ink transition-transform duration-150 hover:-translate-y-0.5"
+              >
+                <Icon name={s.icon} size={17} />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <nav aria-label="Explorar">
+        <h3 class="mb-4 font-display text-xs uppercase tracking-[0.2em] text-cream/50">Explorar</h3>
+        <ul class="space-y-3">
+          {
+            site.nav.map((item) => (
+              <li>
+                <a href={item.href} class="text-sm text-cream/70 transition-colors hover:text-brutal-yellow">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="flex flex-col gap-4">
+        <h3 class="font-display text-xs uppercase tracking-[0.2em] text-cream/50">Contacto</h3>
+        <a
+          href={`mailto:${site.email}`}
+          class="inline-flex items-center gap-2 text-sm text-cream/70 transition-colors hover:text-brutal-yellow"
+        >
+          <Icon name="mail" size={16} />
+          {site.email}
+        </a>
+        <p class="max-w-[220px] text-xs leading-relaxed text-cream/40">
+          Respondemos en menos de 24 h. Menos tiempo de espera, más tiempo de campaña.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="mb-4 font-display text-xs uppercase tracking-[0.2em] text-cream/50">Café o videollamada</h3>
+        <a
+          href="#contacto"
+          class="inline-flex items-center gap-2 border-3 border-brutal-yellow bg-brutal-yellow px-4 py-3 font-body text-xs font-bold uppercase text-ink shadow-brutal-sm transition-transform duration-150 hover:-translate-y-0.5"
+        >
+          Agenda una llamada
+          <Icon name="arrow-right" size={14} />
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-14 flex flex-col items-center justify-between gap-4 border-t-3 border-cream/20 pt-8 text-xs text-cream/40 sm:flex-row">
+      <p>© {new Date().getFullYear()} {site.name}. Sin copyrights, sin tonterías.</p>
+      <p class="font-mono">hecho SIN.FILTRO · v1.0.0</p>
+    </div>
+  </div>
+</footer>

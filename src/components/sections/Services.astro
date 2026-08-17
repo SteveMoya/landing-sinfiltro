@@ -1,0 +1,59 @@
+---
+import { services } from '../../data/services';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Sticker from '../ui/Sticker.astro';
+import Icon from '../ui/Icon.astro';
+
+const stickerTones: Record<string, 'yellow' | 'red' | 'lime' | 'cyan' | 'pink' | 'cream'> = {
+  yellow: 'cream',
+  red: 'yellow',
+  lime: 'pink',
+  cyan: 'red',
+  pink: 'cream',
+  cream: 'red',
+};
+---
+
+<Section id="servicios" ariaLabelledBy="services-title" background="cream">
+  <div class="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+    <div>
+      <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-ink/50">Servicios</p>
+      <h2 id="services-title" class="font-display text-5xl uppercase tracking-tight md:text-6xl">
+        Qué hacemos<span class="bg-brutal-red px-2 text-cream">y qué no</span>
+      </h2>
+    </div>
+    <p class="max-w-sm text-ink/60">
+      Seis servicios. Sin extras vendidos por cuadro. Todo lo demás, lo resolvemos dentro de estos seis o te decimos
+      que no es nuestro sitio.
+    </p>
+  </div>
+
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {
+      services.map((s, index) => (
+        <div data-reveal style={`--reveal-delay:${(index % 3) * 80}ms`} class="relative">
+          <Card tone={s.tone} class="flex h-full flex-col">
+            <div class="flex items-start justify-between">
+              <span class="grid h-11 w-11 place-items-center border-3 border-ink bg-brutal-yellow text-ink">
+                <Icon name={s.icon} size={20} />
+              </span>
+              <span class="font-display text-3xl text-ink/20">{s.tag}</span>
+            </div>
+            <h3 class="mt-5 font-display text-2xl uppercase tracking-tight">{s.title}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink/70">{s.description}</p>
+          </Card>
+          {s.sticker && (
+            <Sticker
+              text={s.sticker}
+              tone={stickerTones[s.tone]}
+              rotate={index % 2 === 0 ? '-rotate-6' : 'rotate-6'}
+              icon="bolt"
+              class="absolute -top-4 right-4"
+            />
+          )}
+        </div>
+      ))
+    }
+  </div>
+</Section>

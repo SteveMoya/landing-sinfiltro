@@ -1,0 +1,27 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+  ariaLabelledBy?: string;
+  background?: 'cream' | 'ink' | 'yellow' | 'red';
+}
+
+const { id, ariaLabelledBy, class: className, background = 'cream' } = Astro.props;
+
+const backgrounds = {
+  cream: 'bg-cream text-ink',
+  ink: 'bg-ink text-cream',
+  yellow: 'bg-brutal-yellow text-ink',
+  red: 'bg-brutal-red text-cream',
+} as const;
+---
+
+<section
+  id={id}
+  aria-labelledby={ariaLabelledBy}
+  class:list={['section-pad scroll-mt-20 border-y-3 border-ink', backgrounds[background], className]}
+>
+  <div class="container-brutal">
+    <slot />
+  </div>
+</section>

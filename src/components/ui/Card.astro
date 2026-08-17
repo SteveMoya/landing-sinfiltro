@@ -1,0 +1,24 @@
+---
+interface Props {
+  class?: string;
+  tone?: 'yellow' | 'red' | 'lime' | 'cyan' | 'pink' | 'cream';
+  as?: 'article' | 'div' | 'li';
+}
+
+const { tone = 'cream', as: Tag = 'div', class: className }: Props = Astro.props;
+
+const tones = {
+  yellow: 'bg-brutal-yellow text-ink',
+  red: 'bg-brutal-red text-cream',
+  lime: 'bg-lime text-ink',
+  cyan: 'bg-cyan text-ink',
+  pink: 'bg-brutal-pink text-ink',
+  cream: 'bg-cream text-ink',
+} as const;
+---
+
+<Tag
+  class:list={['brutal-lg p-6 transition-transform duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5', tones[tone], className]}
+>
+  <slot />
+</Tag>

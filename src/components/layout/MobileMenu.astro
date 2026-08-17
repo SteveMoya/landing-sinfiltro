@@ -1,0 +1,59 @@
+---
+import { site } from '../../data/site';
+import Icon from '../ui/Icon.astro';
+---
+
+<div
+  data-menu
+  id="mobile-menu"
+  class="fixed inset-0 z-40 hidden lg:hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
+>
+  <div class="absolute inset-0 bg-brutal-yellow"></div>
+
+  <nav class="container-brutal relative flex h-full flex-col justify-center gap-2" aria-label="Menú móvil">
+    {
+      site.nav.map((item) => (
+        <a
+          href={item.href}
+          class="border-b-3 border-ink py-3 font-display text-4xl uppercase tracking-tight text-ink transition-transform duration-150 hover:translate-x-2"
+        >
+          {item.label}
+        </a>
+      ))
+    }
+    <a
+      href="#contacto"
+      class="mt-6 inline-flex w-full items-center justify-center gap-2 border-3 border-ink bg-ink px-6 py-4 font-body text-sm font-bold uppercase text-cream shadow-brutal-sm"
+    >
+      Hablemos claro
+      <Icon name="arrow-right" size={16} />
+    </a>
+    <div class="mt-8 flex gap-3">
+      {
+        site.socials.map((s) => (
+          <a
+            href={s.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.name}
+            class="brutal-sm grid h-11 w-11 place-items-center bg-cream text-ink transition-transform duration-150 hover:-translate-y-0.5"
+          >
+            <Icon name={s.icon} size={18} />
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+
+  <button
+    data-menu-close
+    type="button"
+    class="brutal-sm absolute right-5 top-5 grid h-11 w-11 place-items-center bg-brutal-red text-cream"
+    aria-label="Cerrar menú"
+  >
+    <Icon name="close" size={22} />
+  </button>
+</div>

@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@import "@fontsource/archivo-black";
+@import "@fontsource/space-mono/400.css";
+@import "@fontsource/space-mono/700.css";
+@import "@fontsource-variable/space-grotesk";
+
+/* ============================================================
+   SIN.FILTRO DESIGN SYSTEM — Tokens
+   Neobrutalismo: color plano, bordes duros, sombras sin blur.
+   ============================================================ */
+@theme {
+  /* Tipografías */
+  --font-display: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+
+  /* Colores plano y brutales */
+  --color-ink: #0d0d0d;
+  --color-cream: #f4f1e8;
+  --color-brutal-yellow: #f7e700;
+  --color-brutal-red: #ff3d00;
+  --color-lime: #b4ff00;
+  --color-cyan: #2de2ff;
+  --color-brutal-pink: #ff5ce1;
+
+  /* Bordes y sombras duras (sin blur) */
+  --border-brutal: 3px solid var(--color-ink);
+  --shadow-brutal: 6px 6px 0 0 var(--color-ink);
+  --shadow-brutal-sm: 4px 4px 0 0 var(--color-ink);
+  --shadow-brutal-lg: 10px 10px 0 0 var(--color-ink);
+
+  /* Animaciones */
+  --animate-marquee: marquee 22s linear infinite;
+  --animate-blink: blink 1.2s steps(2, start) infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream font-body text-ink antialiased;
+  }
+
+  ::selection {
+    background: var(--color-brutal-yellow);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+}
+
+/* ============================================================
+   Utilidades de marca
+   ============================================================ */
+@layer components {
+  .container-brutal {
+    @apply mx-auto w-full max-w-6xl px-6 lg:px-8;
+  }
+
+  .section-pad {
+    @apply py-24 md:py-32;
+  }
+
+  /* Botón/superficie brutal estándar */
+  .brutal-sm {
+    border: 3px solid var(--color-ink);
+    box-shadow: var(--shadow-brutal-sm);
+  }
+
+  .brutal {
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-brutal-sm);
+  }
+
+  .brutal-lg {
+    border: var(--border-brutal);
+    box-shadow: var(--shadow-brutal);
+  }
+}
+
+/* Header: base + scrolled (fuera de @layer para no perder contra scoped) */
+[data-header] {
+  background: transparent;
+}
+
+[data-header].is-scrolled {
+  background: var(--color-brutal-yellow);
+  border-bottom: 3px solid var(--color-ink);
+}
+
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   prefers-reduced-motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

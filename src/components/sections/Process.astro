@@ -1,0 +1,42 @@
+---
+import { process } from '../../data/process';
+import Section from '../ui/Section.astro';
+
+const tones: Record<string, string> = {
+  yellow: 'bg-brutal-yellow text-ink',
+  red: 'bg-brutal-red text-cream',
+  lime: 'bg-lime text-ink',
+  cyan: 'bg-cyan text-ink',
+};
+---
+
+<Section id="proceso" ariaLabelledBy="process-title" background="yellow">
+  <div class="mb-14 max-w-2xl">
+    <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-ink/60">Proceso</p>
+    <h2 id="process-title" class="font-display text-5xl uppercase tracking-tight md:text-6xl">
+      Cómo va a ir esto
+    </h2>
+  </div>
+
+  <ol class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+    {
+      process.map((step, index) => (
+        <li data-reveal style={`--reveal-delay:${index * 90}ms`} class="relative">
+          <div class="brutal-lg relative z-10 h-full bg-cream p-6 transition-transform duration-150 hover:-translate-y-1">
+            <span class:list={['grid h-12 w-12 place-items-center border-3 border-ink font-display text-lg', tones[step.tone]]}>
+              {step.num}
+            </span>
+            <p class="mt-4 font-mono text-[11px] font-bold uppercase tracking-widest text-ink/50">{step.duration}</p>
+            <h3 class="mt-2 font-display text-xl uppercase tracking-tight">{step.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink/70">{step.description}</p>
+          </div>
+          {index < process.length - 1 && (
+            <span aria-hidden="true" class="absolute -right-5 top-1/2 z-20 hidden -translate-y-1/2 font-display text-3xl text-ink lg:block">
+              →
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</Section>

@@ -1,0 +1,35 @@
+---
+import { site } from '../../data/site';
+import Section from '../ui/Section.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import Sticker from '../ui/Sticker.astro';
+---
+
+<Section id="contacto" ariaLabelledBy="contact-title" background="red">
+  <div class="relative overflow-hidden">
+    <Sticker text="SIN COMPROMISO" tone="yellow" rotate="-rotate-6" class="absolute left-6 top-0 hidden lg:inline-flex" />
+    <Sticker text="RESPUESTA < 24H" tone="lime" rotate="rotate-6" class="absolute right-10 top-10 hidden lg:inline-flex" />
+
+    <div data-reveal class="mx-auto max-w-3xl text-center">
+      <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-cream/70">Contacto</p>
+      <h2 id="contact-title" class="font-display text-5xl uppercase tracking-tight text-cream md:text-7xl">
+        ¿Hablamos<br />sin filtros?
+      </h2>
+      <p class="mx-auto mt-6 max-w-xl text-lg text-cream/85">
+        Cuéntanos qué vendes y dónde te duele. La primera llamada es gratis y sin agenda de ventas.
+        Si no podemos ayudarte, te lo decimos en la misma llamada.
+      </p>
+
+      <div class="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <Button href={`mailto:${site.email}`} variant="yellow" size="lg">
+          <Icon name="mail" size={18} />
+          {site.email}
+        </Button>
+        <Button href="#manifiesto" variant="outline" size="lg" class="!border-cream !bg-transparent !text-cream hover:!bg-cream hover:!text-ink">
+          Leer el manifiesto
+        </Button>
+      </div>
+    </div>
+  </div>
+</Section>

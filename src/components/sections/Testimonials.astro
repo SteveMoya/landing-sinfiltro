@@ -1,0 +1,42 @@
+---
+import { testimonials } from '../../data/testimonials';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+
+const tones = ['yellow', 'lime', 'cyan'] as const;
+const rotate = ['-rotate-2', 'rotate-1', '-rotate-1'] as const;
+---
+
+<Section id="opiniones" ariaLabelledBy="testimonials-title" background="cream">
+  <div class="mb-14 max-w-2xl">
+    <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-ink/50">Opiniones</p>
+    <h2 id="testimonials-title" class="font-display text-5xl uppercase tracking-tight md:text-6xl">
+      Ellos lo cuentan<span class="bg-cyan px-2 text-ink">mejor que nosotros</span>
+    </h2>
+  </div>
+
+  <ul class="grid gap-8 md:grid-cols-3">
+    {
+      testimonials.map((t, index) => (
+        <li data-reveal style={`--reveal-delay:${index * 90}ms`} class={rotate[index % 3]}>
+          <Card tone={tones[index % 3]} class="h-full">
+            <Icon name="quote" size={28} class="text-ink/40" />
+            <blockquote class="mt-4 text-base leading-relaxed">
+              “{t.quote}”
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3 border-t-3 border-ink/20 pt-4">
+              <span class="brutal-sm grid h-11 w-11 place-items-center bg-brutal-red font-display text-sm text-cream">
+                {t.initials}
+              </span>
+              <div>
+                <p class="font-display uppercase tracking-tight">{t.name}</p>
+                <p class="font-mono text-xs text-ink/60">{t.role}</p>
+              </div>
+            </figcaption>
+          </Card>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

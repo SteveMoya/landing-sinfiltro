@@ -1,0 +1,33 @@
+---
+import { stats } from '../../data/stats';
+import Section from '../ui/Section.astro';
+
+const tones: Record<string, string> = {
+  yellow: 'border-brutal-yellow text-brutal-yellow',
+  red: 'border-brutal-red text-brutal-red',
+  lime: 'border-lime text-lime',
+  cyan: 'border-cyan text-cyan',
+};
+---
+
+<Section id="resultados" ariaLabelledBy="stats-title" background="ink">
+  <div class="mb-14 max-w-2xl">
+    <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-cream/50">Resultados</p>
+    <h2 id="stats-title" class="font-display text-5xl uppercase tracking-tight text-cream md:text-6xl">
+      Los números no mienten
+    </h2>
+  </div>
+
+  <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      stats.map((stat, index) => (
+        <li data-reveal style={`--reveal-delay:${index * 80}ms`}>
+          <div class="border-3 bg-ink p-6 text-center transition-transform duration-150 hover:-translate-y-1">
+            <p class:list={['font-display text-6xl tracking-tight', tones[stat.tone]]}>{stat.value}</p>
+            <p class="mt-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-cream/60">{stat.label}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

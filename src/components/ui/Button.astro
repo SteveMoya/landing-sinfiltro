@@ -1,0 +1,59 @@
+---
+export type ButtonVariant = 'ink' | 'yellow' | 'red' | 'lime' | 'outline';
+export type ButtonSize = 'sm' | 'md' | 'lg';
+
+interface Props {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  ariaLabel?: string;
+  target?: string;
+  rel?: string;
+  class?: string;
+}
+
+const {
+  variant = 'ink',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  ariaLabel,
+  target,
+  rel,
+  class: className,
+} = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2 border-3 border-ink font-body text-sm font-bold uppercase tracking-wide transition-all duration-150 ease-out focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-ink disabled:pointer-events-none disabled:opacity-40';
+
+const variants: Record<ButtonVariant, string> = {
+  ink: 'bg-ink text-cream shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none',
+  yellow: 'bg-brutal-yellow text-ink shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none',
+  red: 'bg-brutal-red text-cream shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none',
+  lime: 'bg-lime text-ink shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none',
+  outline: 'bg-cream text-ink shadow-brutal-sm hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none',
+};
+
+const sizes: Record<ButtonSize, string> = {
+  sm: 'px-4 py-2 text-xs',
+  md: 'px-6 py-3.5',
+  lg: 'px-8 py-4 text-base',
+};
+
+const classes = [base, variants[variant], sizes[size], className].filter(Boolean).join(' ');
+---
+
+{
+  href ? (
+    <a href={href} class={classes} aria-label={ariaLabel} aria-disabled={disabled || undefined} target={target} rel={rel}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} aria-label={ariaLabel} disabled={disabled}>
+      <slot />
+    </button>
+  )
+}

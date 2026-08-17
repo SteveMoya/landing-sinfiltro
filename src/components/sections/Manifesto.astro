@@ -1,0 +1,36 @@
+---
+import Section from '../ui/Section.astro';
+import Sticker from '../ui/Sticker.astro';
+---
+
+<Section id="manifiesto" ariaLabelledBy="manifiesto-title" background="ink">
+  <div class="grid gap-12 lg:grid-cols-[1fr_2fr]">
+    <div data-reveal>
+      <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-brutal-yellow">Manifiesto</p>
+      <h2 id="manifiesto-title" class="font-display text-4xl uppercase tracking-tight text-cream md:text-5xl">
+        El marketing tiene un problema
+      </h2>
+      <div class="mt-6">
+        <Sticker text="LO LEÍSTE BIEN" tone="red" rotate="rotate-3" />
+      </div>
+    </div>
+
+    <div class="space-y-8 text-lg leading-relaxed text-cream/85 md:text-xl" data-reveal style="--reveal-delay:100ms">
+      <p>
+        <span class="bg-brutal-red px-1 font-bold text-cream">Demasiadas agencias</span> facturan presentaciones de 90
+        diapositivas y entregan cero resultados. Venden humo, prometen luna y luego piden más presupuesto para "optimizar".
+      </p>
+      <p>
+        Nosotros hacemos lo contrario: <span class="bg-brutal-yellow px-1 font-bold text-ink">diagnósticos duros, planes de una página y
+        ejecución esta semana</span>. Nuestro trabajo se mide en métricas que duelen: ventas, leads, ROAS. No en likes.
+      </p>
+      <p class="border-l-3 border-brutal-red pl-4 font-display text-2xl uppercase tracking-tight text-brutal-yellow">
+        Si no funciona, lo decimos. Si no se arregla, lo matamos.
+      </p>
+      <p>
+        El buen marketing es simple: el mensaje correcto, a la persona correcta, en el momento correcto. Lo demás es
+        decoración. Y la decoración la hacemos <span class="font-bold text-brutal-pink">solo si sobra presupuesto</span>.
+      </p>
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,57 @@
+---
+import { site } from '../../data/site';
+import Button from '../ui/Button.astro';
+import Sticker from '../ui/Sticker.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="relative overflow-hidden pt-28 md:pt-40">
+  <div class="container-brutal relative">
+    <div class="max-w-4xl">
+      <div data-reveal class="flex flex-wrap items-center gap-3">
+        <span class="brutal-sm bg-brutal-red px-3 py-1 font-mono text-xs font-bold uppercase tracking-widest text-cream">
+          {site.hero.badge}
+        </span>
+        <span class="font-mono text-xs font-bold uppercase tracking-widest animate-blink">▮</span>
+      </div>
+
+      <h1 data-reveal style="--reveal-delay:80ms" class="mt-6 font-display text-[15vw] leading-[0.92] tracking-tighter uppercase sm:text-8xl md:text-9xl lg:text-[8.5rem]">
+        {site.hero.titleLines[0]}<br />
+        <span class="bg-brutal-yellow px-2">{site.hero.titleLines[1]}</span><br />
+        <span class="relative inline-block">
+          {site.hero.titleLines[2]}
+          <Sticker text="SIN HUMO" tone="red" rotate="-rotate-6" class="absolute -right-8 -top-6 hidden sm:inline-flex" />
+        </span>
+      </h1>
+
+      <p data-reveal style="--reveal-delay:160ms" class="mt-8 max-w-xl border-l-3 border-ink pl-4 text-lg leading-relaxed">
+        {site.hero.subtitle}
+      </p>
+
+      <div data-reveal style="--reveal-delay:240ms" class="mt-9 flex flex-col gap-4 sm:flex-row">
+        <Button href="#contacto" variant="yellow" size="lg">
+          {site.hero.primaryCta}
+          <Icon name="arrow-right" size={18} />
+        </Button>
+        <Button href="#manifiesto" variant="outline" size="lg">
+          {site.hero.secondaryCta}
+        </Button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marquee brutal -->
+  <div aria-hidden="true" class="mt-20 -rotate-1 border-y-3 border-ink bg-brutal-red py-3.5">
+    <div class="flex w-max animate-marquee gap-8 whitespace-nowrap">
+      {[0, 1].map((i) => (
+        <div class="flex items-center gap-8 pr-8">
+          {site.marquee.map((word) => (
+            <span class="font-display text-xl uppercase tracking-wide text-cream">
+              {word} <span class="ml-6 text-brutal-yellow">★</span>
+            </span>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

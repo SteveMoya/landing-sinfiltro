@@ -1,0 +1,35 @@
+---
+import type { IconName } from './Icon.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  text: string;
+  tone?: 'yellow' | 'red' | 'lime' | 'cyan' | 'pink' | 'cream';
+  rotate?: string;
+  icon?: IconName;
+  class?: string;
+}
+
+const { text, tone = 'yellow', rotate = '-rotate-3', icon, class: className } = Astro.props;
+
+const tones = {
+  yellow: 'bg-brutal-yellow text-ink',
+  red: 'bg-brutal-red text-cream',
+  lime: 'bg-lime text-ink',
+  cyan: 'bg-cyan text-ink',
+  pink: 'bg-brutal-pink text-ink',
+  cream: 'bg-cream text-ink',
+} as const;
+---
+
+<span
+  class:list={[
+    'brutal inline-flex items-center gap-2 px-4 py-1.5 font-display text-xs uppercase tracking-wide whitespace-nowrap',
+    tones[tone],
+    rotate,
+    className,
+  ]}
+>
+  {icon && <Icon name={icon} size={13} class="shrink-0" />}
+  {text}
+</span>
