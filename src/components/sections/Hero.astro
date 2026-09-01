@@ -5,46 +5,48 @@ import Sticker from '../ui/Sticker.astro';
 import Icon from '../ui/Icon.astro';
 ---
 
-<section class="relative overflow-hidden pt-28 md:pt-40">
+<section class="relative overflow-hidden pt-28 md:pt-36">
   <div class="container-brutal relative">
-    <div class="max-w-4xl">
-      <div data-reveal class="flex flex-wrap items-center gap-3">
-        <span class="brutal-sm bg-brutal-red px-3 py-1 font-mono text-xs font-bold uppercase tracking-widest text-cream">
-          {site.hero.badge}
-        </span>
-        <span class="font-mono text-xs font-bold uppercase tracking-widest animate-blink">▮</span>
+    <div class="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
+      <div>
+        <div data-reveal class="flex flex-wrap items-center gap-3">
+          <span class="brutal-sm bg-brutal-red px-3 py-1 font-mono text-xs font-bold uppercase tracking-widest text-cream">
+            {site.hero.badge}
+          </span>
+          <span class="font-mono text-xs font-bold uppercase tracking-widest animate-blink">▮</span>
+        </div>
+
+        <h1 data-reveal style="--reveal-delay:80ms" class="mt-6 font-display text-6xl font-bold leading-[0.95] tracking-tighter uppercase sm:text-7xl lg:text-8xl">
+          {site.hero.titleLines[0]}<br />
+          <span class="bg-brutal-yellow px-3">{site.hero.titleLines[1]}</span><br />
+          <span class="relative inline-block">
+            {site.hero.titleLines[2]}
+            <Sticker text="SIN HUMO" tone="red" rotate="-rotate-6" class="absolute -right-10 -top-6 hidden md:inline-flex" />
+          </span>
+        </h1>
+
+        <p data-reveal style="--reveal-delay:160ms" class="mt-7 max-w-xl border-l-3 border-ink pl-4 text-lg leading-relaxed">
+          {site.hero.subtitle}
+        </p>
+
+        <div data-reveal style="--reveal-delay:240ms" class="mt-9 flex flex-col gap-4 sm:flex-row">
+          <Button href="#contacto" variant="yellow" size="lg">
+            {site.hero.primaryCta}
+            <Icon name="arrow-right" size={18} />
+          </Button>
+          <Button href="#manifiesto" variant="outline" size="lg">
+            {site.hero.secondaryCta}
+          </Button>
+        </div>
       </div>
 
-      <h1 data-reveal style="--reveal-delay:80ms" class="mt-6 font-display text-[15vw] leading-[0.92] tracking-tighter uppercase sm:text-8xl md:text-9xl lg:text-[8.5rem]">
-        {site.hero.titleLines[0]}<br />
-        <span class="bg-brutal-yellow px-2">{site.hero.titleLines[1]}</span><br />
-        <span class="relative inline-block">
-          {site.hero.titleLines[2]}
-          <Sticker text="SIN HUMO" tone="red" rotate="-rotate-6" class="absolute -right-8 -top-6 hidden sm:inline-flex" />
-        </span>
-      </h1>
-
-      <p data-reveal style="--reveal-delay:160ms" class="mt-8 max-w-xl border-l-3 border-ink pl-4 text-lg leading-relaxed">
-        {site.hero.subtitle}
-      </p>
-
-      <div data-reveal style="--reveal-delay:240ms" class="mt-9 flex flex-col gap-4 sm:flex-row">
-        <Button href="#contacto" variant="yellow" size="lg">
-          {site.hero.primaryCta}
-          <Icon name="arrow-right" size={18} />
-        </Button>
-        <Button href="#manifiesto" variant="outline" size="lg">
-          {site.hero.secondaryCta}
-        </Button>
-      </div>
-
-      <!-- Foto brutalista: street neon cyberpunk -->
-      <figure data-reveal style="--reveal-delay:320ms" class="relative mt-12 max-w-2xl -rotate-1">
+      <!-- Foto brutalista: street neon cyberpunk (columna derecha) -->
+      <figure data-reveal style="--reveal-delay:320ms" class="relative rotate-1">
         <div class="border-[3px] border-ink bg-cream shadow-brutal">
           <img
             src="/hero-cyberpunk.jpg"
             alt="Escena urbana neon cyberpunk de noche"
-            class="h-64 w-full object-cover sm:h-80"
+            class="h-72 w-full object-cover sm:h-96 lg:h-[30rem]"
           />
           <figcaption class="flex items-center justify-between gap-4 border-t-[3px] border-ink bg-brutal-yellow px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-widest text-ink">
             <span>Street neon / 24/7</span>
