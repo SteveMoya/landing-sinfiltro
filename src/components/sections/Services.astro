@@ -23,8 +23,7 @@ const stickerTones: Record<string, 'yellow' | 'red' | 'lime' | 'cyan' | 'pink' |
         Qué hacemos<span class="bg-brutal-red px-2 text-cream">y qué no</span>
       </h2>
       <p class="mt-4 max-w-sm text-ink/60">
-        Seis servicios. Sin extras vendidos por cuadro. Todo lo demás, lo resolvemos dentro de estos seis o te decimos
-        que no es nuestro sitio.
+        Seis servicios. Sin extras vendidos por cuadro. Toca cada uno para ver qué hace y qué mejora en tu negocio.
       </p>
     </div>
 
@@ -56,28 +55,120 @@ const stickerTones: Record<string, 'yellow' | 'red' | 'lime' | 'cyan' | 'pink' |
   <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
     {
       services.map((s, index) => (
-        <div data-reveal style={`--reveal-delay:${(index % 3) * 80}ms`} class="relative">
-          <Card tone={s.tone} class="flex h-full flex-col">
-            <div class="flex items-start justify-between">
-              <span class="grid h-11 w-11 place-items-center border-3 border-ink bg-brutal-yellow text-ink">
-                <Icon name={s.icon} size={20} />
+        <div
+          data-reveal
+          style={`--reveal-delay:${(index % 3) * 80}ms`}
+          class="relative"
+        >
+          <button
+            type="button"
+            data-service-card
+            data-title={s.title}
+            data-tag={s.tag}
+            data-long={s.long}
+            data-what={s.what.map((w) => `<li>${w}</li>`).join('')}
+            data-improves={s.improves}
+            aria-haspopup="dialog"
+            class="group block h-full w-full cursor-pointer text-left"
+          >
+            <Card
+              tone={s.tone}
+              class="flex h-full flex-col transition-transform duration-150 group-hover:-translate-x-0.5 group-hover:-translate-y-0.5"
+            >
+              <div class="flex items-start justify-between">
+                <span class="grid h-11 w-11 place-items-center border-3 border-ink bg-brutal-yellow text-ink">
+                  <Icon name={s.icon} size={20} />
+                </span>
+                <span class="font-display text-3xl text-ink/20">{s.tag}</span>
+              </div>
+              <h3 class="mt-5 font-display text-2xl uppercase tracking-tight">{s.title}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-ink/70">{s.description}</p>
+              <span class="mt-4 inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.15em] text-ink/70 transition-colors group-hover:text-ink">
+                Ver detalle <span aria-hidden="true">→</span>
               </span>
-              <span class="font-display text-3xl text-ink/20">{s.tag}</span>
-            </div>
-            <h3 class="mt-5 font-display text-2xl uppercase tracking-tight">{s.title}</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink/70">{s.description}</p>
-          </Card>
-          {s.sticker && (
-            <Sticker
-              text={s.sticker}
-              tone={stickerTones[s.tone]}
-              rotate={index % 2 === 0 ? '-rotate-6' : 'rotate-6'}
-              icon="bolt"
-              class="absolute -top-4 right-4"
-            />
-          )}
+            </Card>
+            {s.sticker && (
+              <Sticker
+                text={s.sticker}
+                tone={stickerTones[s.tone]}
+                rotate={index % 2 === 0 ? '-rotate-6' : 'rotate-6'}
+                icon="bolt"
+                class="absolute -top-4 right-4"
+              />
+            )}
+          </button>
         </div>
       ))
     }
   </div>
+
+  <!-- Modal de servicio (neobrutalista) -->
+  <div
+    id="service-modal"
+    data-modal
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-ink/70 p-4 backdrop-blur-sm"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="service-modal-title"
+  >
+    <div
+      data-modal-dialog
+      class="relative w-full max-w-2xl border-3 border-ink bg-cream p-7 shadow-brutal-lg sm:p-9"
+    >
+      <!-- Sticker superior -->
+      <Sticker
+        text="sin humo"
+        tone="red"
+        rotate="-rotate-6"
+        icon="bolt"
+        class="absolute -top-7 right-6"
+      />
+
+      <div class="flex items-start justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <span id="service-modal-tag" data-modal-tag class="font-display text-4xl text-ink/20">01</span>
+          <h3 id="service-modal-title" data-modal-title class="font-display text-3xl uppercase tracking-tight"></h3>
+        </div>
+        <button
+          type="button"
+          data-modal-close
+          aria-label="Cerrar"
+          class="grid h-11 w-11 shrink-0 place-items-center border-3 border-ink bg-brutal-yellow text-ink shadow-brutal-sm transition-transform hover:-translate-y-0.5"
+        >
+          <Icon name="x" size={20} />
+        </button>
+      </div>
+
+      <p data-modal-long class="mt-5 text-base leading-relaxed text-ink/80"></p>
+
+      <div class="mt-7 grid gap-6 sm:grid-cols-2">
+        <div class="border-3 border-ink bg-brutal-yellow p-5">
+          <h4 class="font-display text-lg uppercase tracking-tight">Qué hace</h4>
+          <ul data-modal-what class="mt-3 space-y-2 text-sm leading-snug"></ul>
+        </div>
+        <div class="border-3 border-ink bg-lime p-5">
+          <h4 class="font-display text-lg uppercase tracking-tight">Qué mejora en tu negocio</h4>
+          <p data-modal-improves class="mt-3 text-sm leading-snug"></p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex items-center justify-between border-t-3 border-ink pt-4">
+        <span class="font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-ink/50">
+          SIN.FILTRO — sin humo, sin relleno
+        </span>
+        <button
+          type="button"
+          data-modal-close
+          class="border-3 border-ink bg-brutal-pink px-4 py-2 font-display text-sm uppercase tracking-wide text-ink shadow-brutal-sm transition-transform hover:-translate-y-0.5"
+        >
+          Entendido
+        </button>
+      </div>
+    </div>
+  </div>
 </Section>
+
+<script>
+  import { initServicesModal } from '../../scripts/services-modal';
+  initServicesModal();
+</script>
