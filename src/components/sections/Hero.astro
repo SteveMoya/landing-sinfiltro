@@ -60,11 +60,11 @@ import Icon from '../ui/Icon.astro';
     </div>
   </div>
 
-  <!-- Marquee brutal -->
+  <!-- Marquee brutal (loop infinito: 2 copias idénticas, sin gap en el track animado) -->
   <div aria-hidden="true" class="mt-20 -rotate-1 border-y-3 border-ink bg-brutal-red py-3.5">
-    <div class="flex w-max animate-marquee gap-8 whitespace-nowrap">
+    <div class="flex w-max animate-marquee whitespace-nowrap">
       {[0, 1].map((i) => (
-        <div class="flex items-center gap-8 pr-8">
+        <div class="flex items-center gap-8 pr-8" aria-hidden={i === 1 ? 'true' : undefined}>
           {site.marquee.map((word) => (
             <span class="font-display text-xl uppercase tracking-wide text-cream">
               {word} <span class="ml-6 text-brutal-yellow">★</span>
