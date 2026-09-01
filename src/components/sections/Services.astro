@@ -16,17 +16,41 @@ const stickerTones: Record<string, 'yellow' | 'red' | 'lime' | 'cyan' | 'pink' |
 ---
 
 <Section id="servicios" ariaLabelledBy="services-title" background="cream">
-  <div class="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+  <div class="mb-14 grid items-center gap-8 lg:grid-cols-[1.1fr_minmax(0,0.9fr)] lg:gap-12">
     <div>
       <p class="mb-3 font-mono text-xs font-bold uppercase tracking-[0.2em] text-ink/50">Servicios</p>
       <h2 id="services-title" class="font-display text-5xl uppercase tracking-tight md:text-6xl">
         Qué hacemos<span class="bg-brutal-red px-2 text-cream">y qué no</span>
       </h2>
+      <p class="mt-4 max-w-sm text-ink/60">
+        Seis servicios. Sin extras vendidos por cuadro. Todo lo demás, lo resolvemos dentro de estos seis o te decimos
+        que no es nuestro sitio.
+      </p>
     </div>
-    <p class="max-w-sm text-ink/60">
-      Seis servicios. Sin extras vendidos por cuadro. Todo lo demás, lo resolvemos dentro de estos seis o te decimos
-      que no es nuestro sitio.
-    </p>
+
+    <div data-reveal class="relative">
+      <div class="relative overflow-hidden border-3 border-ink shadow-brutal">
+        <img
+          src="/services-neon.jpg"
+          alt="Estudio SIN.FILTRO iluminado con neón"
+          loading="lazy"
+          class="h-full w-full object-cover"
+        />
+        <!-- Franja de recorte bruto -->
+        <div class="flex items-center justify-between border-t-3 border-ink bg-brutal-yellow px-4 py-2.5">
+          <span class="font-display text-xs font-black uppercase tracking-[0.15em] text-ink">SIN.FILTRO ©</span>
+          <span class="font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-ink/70">Street work — 2024</span>
+        </div>
+      </div>
+      <!-- Sticker duro encima -->
+      <Sticker
+        text="sin humo"
+        tone="red"
+        rotate="rotate-6"
+        icon="bolt"
+        class="absolute -right-4 -top-6"
+      />
+    </div>
   </div>
 
   <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
