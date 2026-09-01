@@ -38,16 +38,22 @@ export function initServicesModal(): void {
 
     lastFocused = document.activeElement as HTMLElement;
     overlay.classList.remove('hidden');
-    overlay.classList.add('flex');
+    overlay.classList.remove('modal-closing');
+    overlay.classList.add('flex', 'modal-open');
     document.body.classList.add('overflow-hidden');
     closeBtn?.focus();
   }
 
   function close(): void {
-    overlay.classList.add('hidden');
-    overlay.classList.remove('flex');
+    if (overlay.classList.contains('modal-closing')) return;
+    overlay.classList.remove('modal-open');
+    overlay.classList.add('modal-closing');
     document.body.classList.remove('overflow-hidden');
     lastFocused?.focus();
+    overlay.addEventListener('animationend', () => {
+      overlay.classList.add('hidden');
+      overlay.classList.remove('flex', 'modal-closing');
+    }, { once: true });
   }
 
   cards.forEach((card) => {
